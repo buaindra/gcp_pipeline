@@ -138,7 +138,7 @@ resource "google_project_iam_member" "composer-service-agent" {
 resource "google_project_iam_member" "composer-worker" {
   project = var.project_id
   role    = "roles/composer.worker"
-  member  = "serviceAccount:${google_service_account.test.email}"
+  member  = "serviceAccount:${google_service_account.service_account.email}"
 }
 
 resource "google_composer_environment" "test" {
