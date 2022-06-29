@@ -24,6 +24,7 @@ variable "gcp_service_list" {
   default = [
      "cloudresourcemanager.googleapis.com",
      "iam.googleapis.com",
+     "servicenetworking.googleapis.com",
 #    "serviceusage.googleapis.com",
      "compute.googleapis.com",  # compute instance
      "sql-component.googleapis.com",  # cloud sql instance
@@ -35,10 +36,6 @@ variable "gcp_service_list" {
 }
 
 # cloudsql variables
-variable "cloudsql_name" {
-  type = string
-}
-
 variable "cloudsql_database_version" {
   type = string
 }

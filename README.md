@@ -42,12 +42,12 @@
    mkdir working
    cd working
    git clone https://github.com/buaindra/gcp_pipeline.git
-   
+   git pull
    ```
 
 3. Execute the terraform script from cloudshell as below:
    ```shell
-   cd working/gcp_pipeline/main/terraform
+   cd ~/working/gcp_pipeline/main/terraform
    terraform init
    terraform plan
    terraform apply

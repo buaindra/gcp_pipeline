@@ -61,6 +61,7 @@ resource "google_project_iam_binding" "sa_role_3" {
 # create cloudsql with postgres
 resource "google_compute_network" "private_network" {
   name = "private-network"
+  depends_on = [google_service_account.service_account]
 }
 
 resource "google_compute_global_address" "private_ip_address" {
@@ -69,12 +70,14 @@ resource "google_compute_global_address" "private_ip_address" {
   address_type  = "INTERNAL"
   prefix_length = 16
   network       = google_compute_network.private_network.id
+  depends_on = [google_compute_network.private_network]
 }
 
 resource "google_service_networking_connection" "private_vpc_connection" {
   network                 = google_compute_network.private_network.id
   service                 = "servicenetworking.googleapis.com"
   reserved_peering_ranges = [google_compute_global_address.private_ip_address.name]
+  depends_on = [google_compute_global_address.private_ip_address]
 }
 
 resource "random_id" "db_name_suffix" {

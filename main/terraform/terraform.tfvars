@@ -8,7 +8,5 @@ deletion_protection = "false"
 sa_id = "sa-gcp-pipeline"
 
 # cloud sql
-cloudsql_name = "maindb"
 cloudsql_database_version = "POSTGRES_14"
-cloudsql_region = "us-central1"
 cloudsql_machine_type = "db-f1-micro"
