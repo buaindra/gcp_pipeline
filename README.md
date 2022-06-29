@@ -1,12 +1,22 @@
-# GCP Pipeline Creation (*End To End Process*)
+# GCP Pipeline Workshop (*End To End Process*)
 
 ## Problem Statement:
-
+> Currently cloud is only the solution for futuristic application, which can handle bigdata for both processing and storing.
+> 
+> There are lots of vendors and clients available who wants to migrate their application/data migration to the google cloud environment.
+> 
+> They expect some POCs/Workshops with the cloud developer to get confident to migrate their existing application/data to google cloud. 
+> 
+> This engagement process sometimes very time taking to understand their existing business approach and replicate same in cloud environment. 
+> Also all best practices approach not work with their existing data stucture or application behaviour. 
+> 
+> So, we need some end to end pipeline in cloud which can create confidence to the customers to adopt cloud technology easily. Later they can customize 
+> these code as per their requirements.
+>
 
 ## Solution Approach:
-
-### PyCharm Git
-1. git -> github -> share project on github
+> Here we are creating end to end pipeline in google cloud which will cover all types of gcp services and 
+> apis. Also we will implement google defined best practices.
 
 ### Google Services/APIs covered:
 1. Cloud IAM
@@ -28,7 +38,12 @@
 4. Terraform Scripting
 
 ### Pre-Requisite:
-1. Install below python packages into virtual env
+1. (*Optional*) Install PyCharm IDE and create new project
+   1. from PyCharm connect to git (git -> github -> share project on github)
+
+2. (*Required*) Create virtual env inside pycharm project or local machine.
+   
+3. (*Required*) Install below python packages into virtual env
     ```shell
     pip install 
     ```
@@ -44,17 +59,16 @@
    git clone https://github.com/buaindra/gcp_pipeline.git
    git pull
    ```
+3. Open terraform.tfvars and modify the changable parameter
+   ```shell
+   cd ~/working/gcp_pipeline/main/terraform
+   ```
 
 3. Execute the terraform script from cloudshell as below:
    ```shell
-   cd ~/working/gcp_pipeline/main/terraform
    terraform init
    terraform plan
    terraform apply
    ```
-   
-3. First create Service Account in Google IAM
-   1. Ref:
-      1.
    
 3. 

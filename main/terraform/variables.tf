@@ -39,7 +39,17 @@ variable "gcp_service_list" {
 variable "cloudsql_database_version" {
   type = string
 }
-
 variable "cloudsql_machine_type" {
+  type = string
+}
+variable "cloudsql_user" {
+  type = string
+}
+variable "cloudsql_pswd" {
+  type = string
+}
+
+# cloud composer
+variable "composer_name" {
   type = string
 }

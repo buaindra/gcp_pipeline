@@ -57,12 +57,30 @@ resource "google_project_iam_binding" "sa_role_3" {
   depends_on = [google_service_account.service_account]
 }
 
-
-# create cloudsql with postgres
-resource "google_compute_network" "private_network" {
-  name = "private-network"
+resource "google_project_iam_binding" "sa_role_4" {
+  project = var.project_id
+  role    = "roles/composer.worker"
+  members = [
+    "serviceAccount:${google_service_account.service_account.email}"
+  ]
   depends_on = [google_service_account.service_account]
 }
+
+
+# create cloudsql with postgres --start--
+
+resource "google_compute_network" "private_network" {
+  name = "private-network"
+  # auto_create_subnetworks = false
+  depends_on = [google_service_account.service_account]
+}
+
+#resource "google_compute_subnetwork" "test" {
+#  name          = "composer-test-subnetwork"
+#  ip_cidr_range = "10.2.0.0/16"
+#  region        = "us-central1"
+#  network       = google_compute_network.test.id
+#}
 
 resource "google_compute_global_address" "private_ip_address" {
   name          = "private-ip-address"
@@ -97,6 +115,57 @@ resource "google_sql_database_instance" "instance" {
     ip_configuration {
       ipv4_enabled    = false
       private_network = google_compute_network.private_network.id
+    }
+  }
+}
+
+resource "google_sql_user" "users" {
+  name     = var.cloudsql_user
+  instance = google_sql_database_instance.instance.name
+  password = var.cloudsql_pswd
+  depends_on = [google_sql_database_instance.instance]
+}
+
+# create cloudsql with postgres --end--
+
+#create cloud composer --start--
+resource "google_composer_environment" "test" {
+  name   = var.composer_name
+  region = var.region
+  config {
+
+    software_config {
+      image_version = "composer-2-airflow-2"
+    }
+
+    workloads_config {
+      scheduler {
+        cpu        = 0.5
+        memory_gb  = 1.875
+        storage_gb = 1
+        count      = 1
+      }
+      web_server {
+        cpu        = 0.5
+        memory_gb  = 1.875
+        storage_gb = 1
+      }
+      worker {
+        cpu = 0.5
+        memory_gb  = 1.875
+        storage_gb = 1
+        min_count  = 1
+        max_count  = 3
+      }
+
+
+    }
+    environment_size = "ENVIRONMENT_SIZE_SMALL"
+
+    node_config {
+      network    = google_compute_network.private_network.id
+      #subnetwork = google_compute_subnetwork.test.id
+      service_account = google_service_account.service_account.name
     }
   }
 }
