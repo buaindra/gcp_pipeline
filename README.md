@@ -34,13 +34,24 @@
     ```
    
 ### How to set-up the infrustructure framework:
-1. Clone the code from GIT Repo to cloudshell or VM Instances
+1. Create new Google Cloud Project:
+   1. Make sure your account has project editor/owner role to get un-interupted execution.
+
+2. Clone the code from GIT Repo to cloudshell or VM Instances.
    ```shell
-   git clone 
+   mkdir working
+   cd working
+   git clone https://github.com/buaindra/gcp_pipeline.git
+   
    ```
-2. Create new Google Cloud Project
-   1. Ref:
-      1. 
+
+3. Execute the terraform script from cloudshell as below:
+   ```shell
+   cd working/gcp_pipeline/main/terraform
+   terraform init
+   terraform plan
+   terraform apply
+   ```
    
 3. First create Service Account in Google IAM
    1. Ref:
