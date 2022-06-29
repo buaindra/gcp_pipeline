@@ -147,7 +147,6 @@ resource "google_composer_environment" "test" {
   config {
     software_config {
       image_version = var.composer_image_version
-      service_account = google_service_account.service_account.email
     }
 
     workloads_config {
