@@ -57,14 +57,14 @@ resource "google_project_iam_binding" "sa_role_3" {
   depends_on = [google_service_account.service_account]
 }
 
-resource "google_project_iam_binding" "sa_role_4" {
-  project = var.project_id
-  role    = "roles/composer.worker"
-  members = [
-    "serviceAccount:${google_service_account.service_account.email}"
-  ]
-  depends_on = [google_service_account.service_account]
-}
+#resource "google_project_iam_binding" "sa_role_4" {
+#  project = var.project_id
+#  role    = "roles/composer.worker"
+#  members = [
+#    "serviceAccount:${google_service_account.service_account.email}"
+#  ]
+#  depends_on = [google_service_account.service_account]
+#}
 
 
 # create cloudsql with postgres --start--
@@ -129,13 +129,25 @@ resource "google_sql_user" "users" {
 # create cloudsql with postgres --end--
 
 #create cloud composer --start--
+resource "google_project_iam_member" "composer-service-agent" {
+  project  = var.project_id
+  role     = "roles/composer.ServiceAgentV2Ext"
+  member   = "serviceAccount:service-${var.project_number}@cloudcomposer-accounts.iam.gserviceaccount.com"
+}
+
+resource "google_project_iam_member" "composer-worker" {
+  project = var.project_id
+  role    = "roles/composer.worker"
+  member  = "serviceAccount:${google_service_account.test.email}"
+}
+
 resource "google_composer_environment" "test" {
   name   = var.composer_name
   region = var.region
   config {
-
     software_config {
-      image_version = "composer-2-airflow-2"
+      image_version = var.composer_image_version
+      service_account = google_service_account.service_account.email
     }
 
     workloads_config {
@@ -168,4 +180,6 @@ resource "google_composer_environment" "test" {
       service_account = google_service_account.service_account.name
     }
   }
+  depends_on = [google_project_iam_member.composer-service-agent,
+    google_project_iam_member.composer-worker]
 }

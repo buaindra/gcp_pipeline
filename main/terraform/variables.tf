@@ -1,6 +1,9 @@
 variable "project_id" {
   type = string
 }
+variable "project_number" {
+  type = string
+}
 variable "region" {
   type = string
 }
@@ -51,5 +54,8 @@ variable "cloudsql_pswd" {
 
 # cloud composer
 variable "composer_name" {
+  type = string
+}
+variable "composer_image_version" {
   type = string
 }

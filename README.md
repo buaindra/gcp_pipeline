@@ -57,18 +57,25 @@
    mkdir working
    cd working
    git clone https://github.com/buaindra/gcp_pipeline.git
-   git pull
+   git pull   *(repeated commands)*
    ```
 3. Open terraform.tfvars and modify the changable parameter
    ```shell
-   cd ~/working/gcp_pipeline/main/terraform
+   cd ~/working/gcp_pipeline/main/terraform   *(repeated commands)*
+   vim terraform.tfvars  *(!wq)
    ```
 
 3. Execute the terraform script from cloudshell as below:
    ```shell
-   terraform init
-   terraform plan
-   terraform apply
+   terraform init   *(repeated commands)*
+   terraform plan   *(repeated commands)*
+   terraform apply  *(repeated commands)*
    ```
+
+
+
+### How to avoid known exceptions/errors:
+1. terraform execution
+   1. If terraform scripts are failing due to service not enabled, again call "terraform apply".
    
-3. 
+   
