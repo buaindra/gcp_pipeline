@@ -85,7 +85,9 @@
          --location LOCATION \
          --update-pypi-package apache-airflow-providers-sendgrid
          
-         
+         gcloud composer environments update ENVIRONMENT_NAME \
+         --location LOCATION \
+         --update-airflow-configs=
          
          ```
       6. 
