@@ -123,7 +123,7 @@ resource "google_sql_user" "users" {
   name     = var.cloudsql_user
   instance = google_sql_database_instance.instance.name
   password = var.cloudsql_pswd
-  depends_on = [google_sql_database_instance.instance, google_composer_environment.composer_env]
+  depends_on = [google_sql_database_instance.instance]
 }
 
 # create cloudsql with postgres --end--
