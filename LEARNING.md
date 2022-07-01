@@ -75,6 +75,7 @@
          1. go to settings -> API Key or Email API -> Integration Guide
       5. execute below scripts on cloud-shell
          ```shell
+         # Already implemented by terraform
          gcloud services enable secretmanager.googleapis.com
          
          gcloud iam service-accounts add-iam-policy-binding sa-gcp-pipeline@gcp-pipeline-354810.iam.gserviceaccount.com \
@@ -84,11 +85,17 @@
          gcloud composer environments update ENVIRONMENT_NAME \
          --location LOCATION \
          --update-pypi-package apache-airflow-providers-sendgrid
+         ```
          
+         ```shell
+         # do execute below scripts manually
          gcloud composer environments update ENVIRONMENT_NAME \
          --location LOCATION \
-         --update-airflow-configs=
-         
+         --update-airflow-configs= secrets-backend=airflow.providers.google.cloud.secrets.secret_manager.CloudSecretManagerBackend,  \
+         email-email_conn_id=sendgrid_default,  \
+         email-email_backend=airflow.providers.sendgrid.utils.emailer.send_email
+              
+             
          ```
       6. 
  

@@ -84,13 +84,8 @@
 4. For Email/ Message trigger, subscribe SendGrid API
    1. Ref:
       1. https://cloud.google.com/composer/docs/composer-2/configure-email
-   2. Go to Google CLoud MarketPlace, Choose free plan, which is sufficient for our use-case.
-   3. Click on "Manage On Provider"
-      1. save your own details
-      2. create sender (single sender creation with sender verification - who will send the email)
-      3. verify your email as sender, and view the same inside Sendgrid UI -> Settings -> Sender Verification
-      4. Create API Key
-         1. go to settings -> API Key or Email API -> Integration Guide
+   2. follow LEARNING.md (Sendgrid Email/Messaging Service)
+      1. 
 
 
 

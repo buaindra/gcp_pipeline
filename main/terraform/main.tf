@@ -149,18 +149,6 @@ resource "google_composer_environment" "composer_env" {
       image_version = var.composer_image_version
     }
 
-    # "[Extra]==Version"
-    pypi_packages = {
-        numpy = ""
-        scipy = "==1.1.0"
-        cloud-sql-python-connector = "[pg8000]"
-        SQLAlchemy = ""
-        google-cloud-logging = ""
-        google-cloud-storage = ""
-        google-cloud-bigquery = ""
-        apache-airflow-providers-sendgrid = ""
-    }
-
     workloads_config {
       scheduler {
         cpu        = 0.5
@@ -195,5 +183,34 @@ resource "google_composer_environment" "composer_env" {
     google_project_iam_member.composer-worker]
 }
 
+resource "google_composer_environment" "composer_env-update" {
+  name   = var.composer_name
+  region = var.region
+
+  config {
+    software_config {
+      airflow_config_overrides = {
+        core-dags_are_paused_at_creation = "True"
+      }
+
+      # "[Extra]==Version"
+      pypi_packages = {
+          numpy = ""
+          scipy = "==1.1.0"
+          cloud-sql-python-connector = "[pg8000]"
+          SQLAlchemy = ""
+          google-cloud-logging = ""
+          google-cloud-storage = ""
+          google-cloud-bigquery = ""
+          apache-airflow-providers-sendgrid = ""
+      }
+
+      env_variables = {
+        FOO = "bar"
+      }
+    }
+  }
+  depends_on = [google_composer_environment.composer_env]
+}
 
 # cloud pub-sub
