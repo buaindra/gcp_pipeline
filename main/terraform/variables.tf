@@ -35,6 +35,7 @@ variable "gcp_service_list" {
      "bigquery.googleapis.com",
      "bigquerystorage.googleapis.com",
      "composer.googleapis.com"  # cloud composer
+     "secretmanager.googleapis.com"  # secret manager to store apikey for sendgrid, sql password
   ]
 }
 

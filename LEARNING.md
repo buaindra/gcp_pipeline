@@ -1,22 +1,31 @@
 ## Learning
 
+### Gcloud:
+1. Google Official: https://cloud.google.com/sdk/gcloud/reference 
+
 ### Cloud IAM:
 1. Roles
    1. Ref:
-      1. https://cloud.google.com/iam/docs/understanding-roles
+      1. Google Official: https://cloud.google.com/iam/docs/understanding-roles
+      2. Google Official: https://cloud.google.com/sdk/gcloud/reference/iam/service-accounts/add-iam-policy-binding#SERVICE_ACCOUNT
    
 
 ### Cloud Composer:
 1. Airflow concepts:
     1. Ref:
-        1. https://airflow.apache.org/docs/apache-airflow/1.10.2/concepts.html
-        2. https://airflow.apache.org/docs/apache-airflow/2.3.2/tutorial.html
+        1. Airflow Official: https://airflow.apache.org/docs/apache-airflow/1.10.2/concepts.html
+        2. Airflow Official: https://airflow.apache.org/docs/apache-airflow/2.3.2/tutorial.html
 
 2. Airflow Contrib vs Provider Module:
     1. Always use Provider module and contrib is depricated.
     2. Ref: https://stackoverflow.com/questions/70243008/diff-between-airflow-providers-and-airflow-contrib
-
    
+
+### Cloud Secret Manager:
+1. Ref:
+   1. Google Official Doc: https://cloud.google.com/secret-manager/docs/access-control
+
+
 ### Terraform:
 1. Terraform Learning:
    1. Ref:
@@ -53,11 +62,41 @@
       1. https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/composer_environment#argument-reference---cloud-composer-2
    
 
+### Sendgrid Email/Messaging Service
+   1. Ref:
+      1. https://cloud.google.com/composer/docs/composer-2/configure-email
+      
+   2. Go to Google Cloud MarketPlace and Choose free plan, which is sufficient for our use-case.
+   3. Click on "Manage On Provider"
+      1. save your own details
+      2. create sender authentication (single sender authentication - who will send the email)
+      3. verify your email as sender, and view the same inside Sendgrid UI -> Settings -> Sender Verification
+      4. Create API Key
+         1. go to settings -> API Key or Email API -> Integration Guide
+      5. execute below scripts on cloud-shell
+         ```shell
+         gcloud services enable secretmanager.googleapis.com
+         
+         gcloud iam service-accounts add-iam-policy-binding sa-gcp-pipeline@gcp-pipeline-354810.iam.gserviceaccount.com \
+         --member='serviceAccount:sa-gcp-pipeline@gcp-pipeline-354810.iam.gserviceaccount.com' \
+         --role='roles/secretmanager.secretAccessor'
+         
+         gcloud composer environments update ENVIRONMENT_NAME \
+         --location LOCATION \
+         --update-pypi-package apache-airflow-providers-sendgrid
+         
+         
+         
+         ```
+      6. 
+ 
+
 
 ### Bash Command
 ```shell
 cd ~  # change directory to default home 
-ls -lart
+ls -lart  # list all files and folder
+rm -r <file_name>
 ```
 
 

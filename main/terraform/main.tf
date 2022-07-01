@@ -57,14 +57,14 @@ resource "google_project_iam_binding" "sa_role_3" {
   depends_on = [google_service_account.service_account]
 }
 
-#resource "google_project_iam_binding" "sa_role_4" {
-#  project = var.project_id
-#  role    = "roles/composer.worker"
-#  members = [
-#    "serviceAccount:${google_service_account.service_account.email}"
-#  ]
-#  depends_on = [google_service_account.service_account]
-#}
+resource "google_project_iam_binding" "sa_role_4" {
+  project = var.project_id
+  role    = "roles/secretmanager.secretAccessor"
+  members = [
+    "serviceAccount:${google_service_account.service_account.email}"
+  ]
+  depends_on = [google_service_account.service_account]
+}
 
 
 # create cloudsql with postgres --start--
@@ -131,7 +131,7 @@ resource "google_sql_user" "users" {
 #create cloud composer --start--
 resource "google_project_iam_member" "composer-service-agent" {
   project  = var.project_id
-  role     = "roles/composer.ServiceAgentV2Ext"
+  role     = "roles/composer.ServiceAgentV2Ext"   # this is require for composer version 2
   member   = "serviceAccount:service-${var.project_number}@cloudcomposer-accounts.iam.gserviceaccount.com"
 }
 
@@ -141,12 +141,24 @@ resource "google_project_iam_member" "composer-worker" {
   member  = "serviceAccount:${google_service_account.service_account.email}"
 }
 
-resource "google_composer_environment" "test" {
+resource "google_composer_environment" "composer_env" {
   name   = var.composer_name
   region = var.region
   config {
     software_config {
       image_version = var.composer_image_version
+    }
+
+    # "[Extra]==Version"
+    pypi_packages = {
+        numpy = ""
+        scipy = "==1.1.0"
+        cloud-sql-python-connector = "[pg8000]"
+        SQLAlchemy = ""
+        google-cloud-logging = ""
+        google-cloud-storage = ""
+        google-cloud-bigquery = ""
+        apache-airflow-providers-sendgrid = ""
     }
 
     workloads_config {
@@ -182,3 +194,6 @@ resource "google_composer_environment" "test" {
   depends_on = [google_project_iam_member.composer-service-agent,
     google_project_iam_member.composer-worker]
 }
+
+
+# cloud pub-sub
