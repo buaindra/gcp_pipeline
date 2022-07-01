@@ -198,7 +198,7 @@ resource "google_composer_environment" "composer_env-update" {
           numpy = ""
           scipy = "==1.1.0"
           cloud-sql-python-connector = "[pg8000]"
-          SQLAlchemy = ""
+          sqlalchemy = ""
           google-cloud-logging = ""
           google-cloud-storage = ""
           google-cloud-bigquery = ""
