@@ -46,10 +46,19 @@
    1. from PyCharm connect to git (git -> github -> share project on github)
 
 2. (*Required*) Create virtual env inside pycharm project or local machine.
-   
-
-4. 
-
+   1. Mac/Linux Syntex:
+      ```shell
+      # pip install virtualenv
+      python3 -m venv env
+      source env/bin/activate
+      deactivate
+      ```
+   2. Windows Syntex:
+      ```shell
+      pip install virtualenv
+      virtualenv <your-env>
+      <your-env>\Scripts\activate
+      ```   
 
 ### How to set-up the infrustructure framework:
 1. Create new Google Cloud Project:
@@ -57,8 +66,33 @@
    > to save the unnecessary future cost
    >
    1. Make sure your account has project editor/owner role to get un-interupted execution.
-   2. project should have linked with active billing account
-   3. 
+   2. project should have linked with active billing account.
+ 
+2. Create Service Account In Google IAM
+   1. Ref:
+      1. https://cloud.google.com/docs/authentication/getting-started
+   ```shell
+   gcloud iam service-accounts create sa-custom-app
+   
+   gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID  \
+   --member="serviceAccount:sa-custom-app@$DEVSHELL_PROJECT_ID.iam.gserviceaccount.com"  \
+   --role=roles/editor
+  
+   gcloud iam service-accounts keys create sa_key.json  \
+   --iam-account=sa-custom-app@$DEVSHELL_PROJECT_ID.iam.gserviceaccount.com
+   ```
+   
+3. Set **GOOGLE_APPLICATION_CREDENTIALS**
+   > For Windows:
+   > 
+   ```cmd
+   set GOOGLE_APPLICATION_CREDENTIALS=secrets/sa_key.json
+   ```
+   > For Unix/Linux:
+   > 
+   ```shell
+   export GOOGLE_APPLICATION_CREDENTIALS="secrets/sa_key.json"
+   ```
    
 
 2. Clone the code from GIT Repo to cloudshell or VM Instances.
@@ -68,26 +102,18 @@
    git clone https://github.com/buaindra/gcp_pipeline.git
    git pull   *(repeated commands)*
    ```
-3. Open terraform.tfvars and modify the changable parameter
+
+3. Execute Create-Infra Script:
    ```shell
-   cd ~/working/gcp_pipeline/main/terraform   *(repeated commands)*
-   vim terraform.tfvars  *(!wq)
+   cd ~/working/
    ```
 
-3. Execute the terraform script from cloudshell as below:
-   ```shell
-   terraform init   *(repeated commands)*
-   terraform plan   *(repeated commands)*
-   terraform apply  *(repeated commands)*
-   ```
 
 4. For Email/ Message trigger, subscribe SendGrid API
    1. Ref:
       1. https://cloud.google.com/composer/docs/composer-2/configure-email
    2. follow LEARNING.md (Sendgrid Email/Messaging Service)
-      1. 
-
-
+   
 
 ### Clear your environment to save the cost
 1. un-subsribe from sendgrid service

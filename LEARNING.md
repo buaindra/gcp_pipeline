@@ -3,12 +3,31 @@
 ### Gcloud:
 1. Google Official: https://cloud.google.com/sdk/gcloud/reference 
 
+
+### Google Cloud Python API:
+1. Google Official: https://cloud.google.com/python/docs/reference
+2. Github: https://github.com/GoogleCloudPlatform/python-docs-samples
+3. Github: https://github.com/googleapis/google-api-python-client
+4. Python env setup in windows: https://cloud.google.com/python/docs/setup#windows
+4. Python with rest APIs:
+    1. https://realpython.com/api-integration-in-python/
+    2. https://www.nylas.com/blog/use-python-requests-module-rest-apis/
+5. https://github.com/googleapis/google-cloud-python#google-cloud-python-client
+
+
+### Google Authentication:
+1. Google Official: https://cloud.google.com/docs/authentication/getting-started#windows
+2. Authenticate with Service Account: https://cloud.google.com/docs/authentication/getting-started#create-service-account-gcloud
+3. Python Lib: https://googleapis.dev/python/google-auth/1.7.0/user-guide.html
+
+
 ### Cloud IAM:
 1. Roles
    1. Ref:
       1. Google Official: https://cloud.google.com/iam/docs/understanding-roles
       2. Google Official: https://cloud.google.com/sdk/gcloud/reference/iam/service-accounts/add-iam-policy-binding#SERVICE_ACCOUNT
-   
+      3. Google Official: https://cloud.google.com/iam/docs/creating-managing-service-accounts#iam-service-accounts-create-python
+    
 
 ### Cloud Composer:
 1. Airflow concepts:
@@ -24,6 +43,9 @@
 ### Cloud Secret Manager:
 1. Ref:
    1. Google Official Doc: https://cloud.google.com/secret-manager/docs/access-control
+
+### Cloud Compute Engine:
+1. Google Official: https://cloud.google.com/compute/docs/api/using-libraries#python_1
 
 
 ### Terraform:

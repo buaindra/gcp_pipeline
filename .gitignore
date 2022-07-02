@@ -131,4 +131,4 @@ dmypy.json
 
 # custom folder by developer
 .idea/
-imp.txt
+secrets/

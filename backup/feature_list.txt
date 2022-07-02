@@ -1,0 +1,2 @@
+1. how to create link like gcloud auth login --remote-bootstrap= (gcloud auth login)
+2. https://medium.com/google-cloud/using-airflow-experimental-rest-api-on-google-cloud-platform-cloud-composer-and-iap-9bd0260f095a
