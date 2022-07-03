@@ -44,6 +44,10 @@
 ### Pre-Requisite:
 1. (*Optional*) Install PyCharm IDE and create new project
    1. from PyCharm connect to git (git -> github -> share project on github)
+   2. connect to Gcloud SDK
+      1. Ref:
+         1. https://cloud.google.com/code/docs/intellij/manage-sdk
+      2. Go to File -> Settings
 
 2. (*Required*) Create virtual env inside pycharm project or local machine.
    1. Mac/Linux Syntex:

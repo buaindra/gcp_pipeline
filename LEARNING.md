@@ -1,4 +1,7 @@
 ## Learning
+1. Draw Software Architechture
+    1. https://googlecloudcheatsheet.withgoogle.com/architecture
+    2. https://excalidraw.com/
 
 ### Gcloud:
 1. Google Official: https://cloud.google.com/sdk/gcloud/reference 
