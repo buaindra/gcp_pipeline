@@ -1,6 +1,7 @@
 ## Learning
 1. Draw Software Architechture
     1. https://googlecloudcheatsheet.withgoogle.com/architecture
+    2. https://cloud.google.com/blog/topics/developers-practitioners/introducing-google-cloud-architecture-diagramming-tool
     2. https://excalidraw.com/
 
 ### Gcloud:
@@ -9,6 +10,7 @@
 
 ### Google Cloud Python API:
 1. Google Official: https://cloud.google.com/python/docs/reference
+    1. https://github.com/googleapis/google-cloud-python
 2. Github: https://github.com/GoogleCloudPlatform/python-docs-samples
 3. Github: https://github.com/googleapis/google-api-python-client
 4. Python env setup in windows: https://cloud.google.com/python/docs/setup#windows

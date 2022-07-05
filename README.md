@@ -47,7 +47,13 @@
    2. connect to Gcloud SDK
       1. Ref:
          1. https://cloud.google.com/code/docs/intellij/manage-sdk
-      2. Go to File -> Settings
+         2. https://cloud.google.com/sdk/docs/install
+      2. Go to File -> Settings -> Tools -> Cloud (*Checking Further, till now skip this option and follow below 3rd step*) 
+      3. Open Powershell and install Google Cloud SDK:
+         ```shell
+         (New-Object Net.WebClient).DownloadFile("https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKInstaller.exe", "$env:Temp\GoogleCloudSDKInstaller.exe")
+         & $env:Temp\GoogleCloudSDKInstaller.exe
+         ```
 
 2. (*Required*) Create virtual env inside pycharm project or local machine.
    1. Mac/Linux Syntex:
